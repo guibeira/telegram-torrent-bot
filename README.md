@@ -1,5 +1,5 @@
 # movie-bot
-A telegram search and download you movies
+A telegram search and download your movies
 
 
 ## Quickstart
@@ -24,4 +24,17 @@ cd telegram-torrent-bot
 cargo build --realease
 sudo cp target/release/movie-bot /usr/local/bin
 
+```
+
+### Running 
+
+Export your telegram token 
+```
+export TELOXIDE_TOKEN=<telegram-token>
+```
+
+then run:
+
+```sh
+movie-bot
 ```
