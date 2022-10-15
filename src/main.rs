@@ -1,3 +1,4 @@
+use std::env;
 mod piratebay;
 extern crate reqwest;
 use reqwest::header::HeaderMap;
@@ -164,9 +165,10 @@ async fn receive_movie_selection(
             "Content-Type",
             "application/x-www-form-urlencoded".parse().unwrap(),
         );
+        let host = env::var("RQBIT_HOST").unwrap_or("http://localhost:3030".to_string());
         let client = reqwest::Client::new();
         client
-            .post("http://127.0.0.1:3030/torrents")
+            .post(format!("{}/torrents", host))
             .headers(headers)
             .body(format!("{}", magnet_link))
             .send()

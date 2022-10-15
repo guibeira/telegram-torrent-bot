@@ -158,20 +158,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "doggaobot"
-version = "0.1.0"
-dependencies = [
- "log",
- "pretty_env_logger",
- "reqwest",
- "serde",
- "serde_json",
- "teloxide",
- "tokio",
- "torrent_search",
-]
-
-[[package]]
 name = "dptree"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -595,6 +581,20 @@ dependencies = [
  "log",
  "wasi",
  "windows-sys",
+]
+
+[[package]]
+name = "movie-bot"
+version = "0.1.0"
+dependencies = [
+ "log",
+ "pretty_env_logger",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "teloxide",
+ "tokio",
+ "torrent_search",
 ]
 
 [[package]]
