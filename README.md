@@ -1,6 +1,6 @@
 # movie-bot
-A telegram search and download your movies
-
+A telegram bot to search and download your movies
+![sample](https://raw.githubusercontent.com/GuilhermeVBeira/telegram-torrent-bot/main/sample.png)
 
 ## Quickstart
 
