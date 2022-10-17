@@ -1,6 +1,7 @@
 use std::env;
 mod piratebay;
 extern crate reqwest;
+
 use reqwest::header::HeaderMap;
 
 use teloxide::{
@@ -165,19 +166,30 @@ async fn receive_movie_selection(
             "Content-Type",
             "application/x-www-form-urlencoded".parse().unwrap(),
         );
-        let host = env::var("RQBIT_HOST").unwrap_or("http://localhost:3030".to_string());
+        let host = env::var("RQBIT_HOST").unwrap_or_else(|_| "http://127.0.0.1:3030".to_string());
         let client = reqwest::Client::new();
-        client
+        let r = client
             .post(format!("{}/torrents", host))
             .headers(headers)
-            .body(format!("{}", magnet_link))
+            .body(magnet_link.to_string())
             .send()
-            .await?;
-        bot.send_message(
-            dialogue.chat_id(),
-            format!("{movie_name}, esta sendo baixado, aguarde para finalizar!"),
-        )
-        .await?;
+            .await;
+
+        if let Ok(r) = r {
+            if r.status().is_success() {
+                bot.send_message(
+                    q.from.id,
+                    format!("Filme {} adicionado com sucesso!", movie_name),
+                )
+                .await?;
+            } else {
+                bot.send_message(q.from.id, "Erro ao adicionar filme!")
+                    .await?;
+            }
+        } else {
+            bot.send_message(q.from.id, "Erro ao adicionar filme!")
+                .await?;
+        }
         dialogue.exit().await?;
     }
 
